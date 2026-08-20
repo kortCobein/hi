@@ -53,3 +53,90 @@ abstract class = base que no puedo instanciar.
 abstract method = método sin cuerpo que el hijo debe completar.
 interface = contrato de métodos que debo cumplir.
 toString() = cómo quiero representar mi objeto como texto. 
+Va rápido:
+
+class Empleado {
+    String nombre;
+
+    public void trabajar() {
+        System.out.println("Empleado trabajando");
+    }
+}
+
+class Docente extends Empleado {
+
+    @Override
+    public void trabajar() {
+        System.out.println("Docente dando clase");
+    }
+}
+
+class Administrativo extends Empleado {
+
+    @Override
+    public void trabajar() {
+        System.out.println("Administrativo trabajando en oficina");
+    }
+}
+
+Aquí tienes un padre:
+
+Empleado
+
+y dos hijos:
+
+Docente
+Administrativo
+
+La herencia está aquí:
+
+class Docente extends Empleado
+class Administrativo extends Empleado
+
+Ahora, esto NO es realmente donde estás aprovechando el polimorfismo:
+
+Docente d = new Docente();
+Administrativo a = new Administrativo();
+
+d.trabajar();
+a.trabajar();
+
+Funciona, pero cada variable ya está declarada directamente como su propia clase.
+
+El polimorfismo se ve más claro aquí:
+
+Empleado e1 = new Docente();
+Empleado e2 = new Administrativo();
+
+e1.trabajar();
+e2.trabajar();
+
+Ambas variables son declaradas como:
+
+Empleado
+
+pero contienen objetos distintos:
+
+new Docente()
+new Administrativo()
+
+Y la salida sería:
+
+Docente dando clase
+Administrativo trabajando en oficina
+
+Ese es el punto del polimorfismo: usar un mismo tipo padre para manejar distintos hijos, y que cada hijo responda con su propio comportamiento.
+
+En corto para el oral:
+
+> Herencia es cuando una clase hija adquiere características del padre con extends. Polimorfismo es cuando puedo usar una referencia del padre para guardar distintos objetos hijos y ejecutar el comportamiento específico de cada uno.
+
+
+
+La diferencia clave es:
+
+Docente d = new Docente();       // herencia existe, pero no aprovecho polimorfismo
+
+Empleado e = new Docente();      // herencia + polimorfismo
+
+Y ojo: para que Empleado e = new Docente(); funcione, primero tiene que existir la relación de herencia Docente extends Empleado.
